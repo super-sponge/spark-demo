@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/
+spark-demo.iml
+spark-streaming1/spark-streaming1.iml
+spark-streaming2/spark-streaming2.iml

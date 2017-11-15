@@ -13,6 +13,7 @@
     <modules>
         <module>spark-streaming1</module>
         <module>spark-streaming2</module>
+        <module>spark-sql</module>
     </modules>
 
 
