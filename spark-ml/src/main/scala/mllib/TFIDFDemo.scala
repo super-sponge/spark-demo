@@ -6,7 +6,7 @@ import org.apache.spark.mllib.linalg.Vector
 import org.apache.spark.rdd.RDD
 
 object TFIDFDemo {
-  def main(args: Array[String]): Unit = {
+  def main(args: Array[String]) {
     val conf = new SparkConf().setAppName("TFIDFDemo")
     val sc = new SparkContext(conf)
     // $example on$
@@ -35,7 +35,6 @@ object TFIDFDemo {
 
     println("tfidfIgnore: ")
     tfidfIgnore.foreach(x => println(x))
-
 
 
     sc.stop()
