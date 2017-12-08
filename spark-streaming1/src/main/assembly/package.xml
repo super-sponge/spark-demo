@@ -41,6 +41,7 @@
                 <include>zookeeper*.jar</include>
                 <include>zkclient*.jar</include>
                 <include>metrics-core*.jar</include>
+                <include>mysql*.jar</include>
             </includes>
         </fileSet>
         <fileSet>

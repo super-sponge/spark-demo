@@ -10,6 +10,7 @@ import utils.ConnectionPool
 
 object NetworkWordCount {
   val logger = LoggerFactory.getLogger(this.getClass)
+
   def main(args: Array[String]) {
     if (args.length < 2) {
       System.err.println("Usage: NetworkWordCount <hostname> <port>")
@@ -30,27 +31,42 @@ object NetworkWordCount {
     val wordCounts = words.map(x => (x, 1)).reduceByKey(_ + _)
     val sql = "insert into wordcount(word, number) values (?,?)"
     wordCounts.foreachRDD { rdd =>
-      println("this is driver program")
-      if(! rdd.isEmpty()) {
-        rdd.foreachPartition { pr => {
-          println("get connect..")
-          val conn = ConnectionPool.getConnection.orNull
-          if (conn != null) {
-            println("process data...")
-            pr.foreach(data => {
-              println("insert data ...")
-              insert(conn, sql, data)
-            })
-            ConnectionPool.closeConnection(conn)
-          } else {
-            println("conn is null")
-          }
-        }
+      println("Enter wordCounts foreachRDD")
+      rdd.foreachPartition { pr => {
+        println("Enter rdd foreachPartition ..")
+        val conn = ConnectionPool.getConnection.orNull
+        if (conn != null) {
+          println("Connect ...")
+          pr.foreach(data => {
+            println("Enter pr foreach  ...")
+            insert(conn, sql, data)
+          })
+          ConnectionPool.closeConnection(conn)
+        } else {
+          println("conn is null")
         }
       }
-
+      }
     }
-//    wordCounts.print()
+
+    //** err demo
+    //    wordCounts.foreachRDD{ rdd =>
+    //      println("enter foreachRDD")
+    //      val conn = ConnectionPool.getConnection.orNull
+    //      if (conn != null) {
+    //        println("Connect succeded..")
+    //        rdd.foreach{ data =>
+    //          println("enter sub foreach ...")
+    //          insert(conn, sql, data)
+    //        }
+    //        ConnectionPool.closeConnection(conn)
+    //      } else  {
+    //        println("Connect null ...")
+    //      }
+    //    }
+
+
+    //    wordCounts.print()
 
     ssc.start()
     ssc.awaitTermination()

@@ -30,6 +30,7 @@
     ./send_message.sh sdc1.sefon.com:6667,sdc2.sefon.com:6667 top1 10 10 PLAINTEXTSASL
 ## 备注
     1. 程序运行状态需要查看具体container的本地日志,才能确定是否成功
+    2. 在把rdd数据写入spark的时候，需要保障jdbc包在每个服务器上面  /usr/hdp/current/spark-client/lib/  (spark.executor.extraClassPath,spark.driver.extraClassPath 配置了这个路径) 
   
     
 

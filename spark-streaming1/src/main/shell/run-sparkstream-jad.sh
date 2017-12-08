@@ -31,7 +31,7 @@ exec "$SPARK_HOME"/bin/spark-submit \
   --jars $JARS \
   --keytab $FWDIR/conf/spark.sefon.keytab \
   --principal dev1/sefon@SEFON.COM \
-  --files $FWDIR/conf/kafka_jaas.conf,$FWDIR/conf/client.sefon.keytab \
+  --files  /usr/hdp/current/spark-client/conf/hive-site.xml,$FWDIR/conf/kafka_jaas.conf,$FWDIR/conf/client.sefon.keytab \
   --driver-java-options "-Djava.security.auth.login.config=kafka_jaas.conf" \
   --conf "spark.executor.extraJavaOptions=-Djava.security.auth.login.config=kafka_jaas.conf" \
   --class $RUN_CLASS \
